@@ -43,10 +43,15 @@ public class MainActivity extends AppCompatActivity {
         fetchComicsFromServer();
         if (comicLoaderService.hasSavedComics()) {
             Log.d(LOG_TAG, "Showing saved comics.");
-            size = comicLoaderService.getSavedComics().size();
-            pagerAdapter = new ComicPagerAdapter(getSupportFragmentManager(), size);
-            viewPager.setAdapter(pagerAdapter);
+            setupComics();
         }
+    }
+
+    private void setupComics() {
+        size = comicLoaderService.getSavedComics().size();
+        pagerAdapter = new ComicPagerAdapter(getSupportFragmentManager(), size);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setOffscreenPageLimit(1);
     }
 
     private void fetchComicsFromServer() {
@@ -56,13 +61,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Comic> comics) {
                 if (comics.size() > size) {
-                    size = comics.size();
                     Log.d(LOG_TAG, "Showing fetched comics.");
                     Toast.makeText(MainActivity.this, R.string.new_comic_notice, Toast.LENGTH_SHORT).show();
-                    viewPager.invalidate();
-                    viewPager.setCurrentItem(0, true);
-                    pagerAdapter.setCount(size);
-                    pagerAdapter.notifyDataSetChanged();
+                    setupComics();
                 }
             }
 

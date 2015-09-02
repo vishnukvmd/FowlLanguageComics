@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -31,6 +33,7 @@ public class ComicFragment extends Fragment {
     private static final String LOG_TAG = ComicFragment.class.getSimpleName();
 
     @Bind(R.id.comic_image) ImageView comicImageView;
+    @Bind(R.id.progress_bar) ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +48,20 @@ public class ComicFragment extends Fragment {
 
     private void setupComic(Comic comic) {
         Log.d(LOG_TAG, "Setting up image: " + comic.imageUrl);
-        Picasso.with(getActivity()).load(comic.imageUrl).into(comicImageView);
+        progressBar.setVisibility(View.VISIBLE);
+        Picasso.with(getActivity())
+                .load(comic.imageUrl)
+                .into(comicImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
     }
 
     @OnLongClick(R.id.comic_image)
