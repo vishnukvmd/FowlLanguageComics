@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private ComicPagerAdapter pagerAdapter;
 
     @Bind(R.id.pager) ViewPager viewPager;
+    @Bind(R.id.next) ImageView nextButton;
+    @Bind(R.id.previous) ImageView previousButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,33 @@ public class MainActivity extends AppCompatActivity {
         size = comicLoaderService.getSavedComics().size();
         pagerAdapter = new ComicPagerAdapter(getSupportFragmentManager(), size);
         viewPager.setAdapter(pagerAdapter);
-        viewPager.setOffscreenPageLimit(1);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float offset, int offsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == size - 1) {
+                    nextButton.setVisibility(View.INVISIBLE);
+                } else {
+                    nextButton.setVisibility(View.VISIBLE);
+                }
+
+                if (position == 0) {
+                    previousButton.setVisibility(View.INVISIBLE);
+                } else {
+                    previousButton.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+        viewPager.setCurrentItem(size - 1);
     }
 
     private void fetchComicsFromServer() {
