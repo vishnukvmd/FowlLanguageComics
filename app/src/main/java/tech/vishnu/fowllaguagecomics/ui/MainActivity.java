@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
     public void scrollToRandomComic() {
         Log.d(LOG_TAG, "Scrolling to random comic.");
         int randomComicPosition = RANDOM_NUMBER_GENERATOR.nextInt(size);
-        viewPager.setCurrentItem(randomComicPosition, true);
+        viewPager.setCurrentItem(randomComicPosition, false);
     }
-
 }
