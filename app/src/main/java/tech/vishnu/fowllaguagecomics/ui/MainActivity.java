@@ -19,6 +19,7 @@ import java.util.Random;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import tech.vishnu.fowllaguagecomics.Comic;
 import tech.vishnu.fowllaguagecomics.R;
 import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
@@ -98,10 +99,24 @@ public class MainActivity extends AppCompatActivity {
         viewPager.arrowScroll(View.FOCUS_RIGHT);
     }
 
+    @OnLongClick(R.id.next)
+    public boolean scrollToLastComic() {
+        Log.d(LOG_TAG, "Scrolling to last comic.");
+        viewPager.setCurrentItem(size - 1, true);
+        return true;
+    }
+
     @OnClick(R.id.previous)
     public void scrollToPreviousComic() {
         Log.d(LOG_TAG, "Scrolling to previous comic.");
         viewPager.arrowScroll(View.FOCUS_LEFT);
+    }
+
+    @OnLongClick(R.id.previous)
+    public boolean scrollToFirstComic() {
+        Log.d(LOG_TAG, "Scrolling to first comic.");
+        viewPager.setCurrentItem(0, true);
+        return true;
     }
 
     @OnClick(R.id.random)
