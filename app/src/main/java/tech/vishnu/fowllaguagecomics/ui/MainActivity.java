@@ -109,4 +109,5 @@ public class MainActivity extends AppCompatActivity {
         int randomComicPosition = RANDOM_NUMBER_GENERATOR.nextInt(size);
         viewPager.setCurrentItem(randomComicPosition, true);
     }
+
 }

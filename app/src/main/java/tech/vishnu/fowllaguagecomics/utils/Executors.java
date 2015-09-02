@@ -9,6 +9,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class Executors {
     public static final ScheduledThreadPoolExecutor http = getExecutor(2, "http");
+    public static final ScheduledThreadPoolExecutor background = getExecutor(2, "background");
 
     public static final Executor ui = new Executor() {
         @Override

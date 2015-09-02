@@ -13,4 +13,7 @@
     <string name="Next">Next</string>
     <string name="share">Share</string>
     <string name="new_comic_notice">New comic available!</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="something_went_wrong">Oops. Something went wrong.</string>
+    <string name="ok">Ok</string>
 </resources>
