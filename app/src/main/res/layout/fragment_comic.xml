@@ -3,11 +3,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="8dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="4dp"
                 tools:context=".MainActivity$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/comic_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        tools:text="Comic title"
+        android:layout_alignTop="@+id/progress_bar"
+        android:layout_centerHorizontal="true"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -25,6 +36,8 @@
         android:id="@+id/comic_image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@+id/comic_title"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/comicDescription"/>
 
 </RelativeLayout>

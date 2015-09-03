@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -36,6 +37,7 @@ public class ComicFragment extends Fragment {
 
     @Bind(R.id.comic_image) ImageView comicImageView;
     @Bind(R.id.progress_bar) ProgressBar progressBar;
+    @Bind(R.id.comic_title) TextView titleTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +51,7 @@ public class ComicFragment extends Fragment {
         return rootView;
     }
 
-    private void setupComic(Comic comic) {
+    private void setupComic(final Comic comic) {
         Log.d(LOG_TAG, "Setting up image: " + comic.imageUrl);
         progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getActivity())
@@ -58,6 +60,7 @@ public class ComicFragment extends Fragment {
                     @Override
                     public void onSuccess() {
                         progressBar.setVisibility(View.GONE);
+                        titleTextView.setText(comic.title);
                     }
 
                     @Override
