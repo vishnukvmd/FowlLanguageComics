@@ -9,16 +9,40 @@
                 android:paddingTop="4dp"
                 tools:context=".MainActivity$PlaceholderFragment">
 
+    <ImageView
+        android:id="@+id/buy_comic"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignLeft="@+id/progress_bar"
+        android:layout_alignStart="@+id/progress_bar"
+        android:layout_alignTop="@+id/progress_bar"
+        android:contentDescription="@string/previous"
+        android:src="@drawable/ic_shopping_cart_black_48dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
     <TextView
         android:id="@+id/comic_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
+        android:layout_alignBottom="@+id/share_comic"
+        android:layout_centerHorizontal="true"
         android:textColor="@android:color/black"
+        android:textSize="22sp"
         android:textStyle="bold"
-        tools:text="Comic title"
+        tools:text="Comic title"/>
+
+    <ImageView
+        android:id="@+id/share_comic"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/comic_image"
+        android:layout_alignRight="@+id/comic_image"
         android:layout_alignTop="@+id/progress_bar"
-        android:layout_centerHorizontal="true"/>
+        android:contentDescription="@string/share"
+        android:src="@drawable/ic_share_black_48dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
