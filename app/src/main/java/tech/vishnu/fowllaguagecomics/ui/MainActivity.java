@@ -29,13 +29,13 @@ import tech.vishnu.fowllaguagecomics.utils.Executors;
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final Random RANDOM_NUMBER_GENERATOR = new Random();
+
     private int size = 0;
     private ComicLoaderService comicLoaderService;
-    private ComicPagerAdapter pagerAdapter;
 
     @Bind(R.id.pager) ViewPager viewPager;
-    @Bind(R.id.next) ImageView nextButton;
-    @Bind(R.id.previous) ImageView previousButton;
+    @Bind(R.id.olderComic) ImageView olderComicButton;
+    @Bind(R.id.newerComic) ImageView newerComicButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupComics() {
         size = comicLoaderService.getSavedComics().size();
-        pagerAdapter = new ComicPagerAdapter(getSupportFragmentManager(), size);
+        ComicPagerAdapter pagerAdapter = new ComicPagerAdapter(getSupportFragmentManager(), size);
         viewPager.setAdapter(pagerAdapter);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -64,15 +64,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == size - 1) {
-                    nextButton.setVisibility(View.INVISIBLE);
+                    olderComicButton.setVisibility(View.INVISIBLE);
                 } else {
-                    nextButton.setVisibility(View.VISIBLE);
+                    olderComicButton.setVisibility(View.VISIBLE);
                 }
 
                 if (position == 0) {
-                    previousButton.setVisibility(View.INVISIBLE);
+                    newerComicButton.setVisibility(View.INVISIBLE);
                 } else {
-                    previousButton.setVisibility(View.VISIBLE);
+                    newerComicButton.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.setCurrentItem(size - 1);
+        viewPager.setCurrentItem(0);
+        newerComicButton.setVisibility(View.INVISIBLE);
     }
 
     private void fetchComicsFromServer() {
@@ -122,26 +123,26 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.next)
+    @OnClick(R.id.olderComic)
     public void scrollToNextComic() {
         Log.d(LOG_TAG, "Scrolling to next comic.");
         viewPager.arrowScroll(View.FOCUS_RIGHT);
     }
 
-    @OnLongClick(R.id.next)
+    @OnLongClick(R.id.olderComic)
     public boolean scrollToLastComic() {
         Log.d(LOG_TAG, "Scrolling to last comic.");
         viewPager.setCurrentItem(size - 1, true);
         return true;
     }
 
-    @OnClick(R.id.previous)
+    @OnClick(R.id.newerComic)
     public void scrollToPreviousComic() {
         Log.d(LOG_TAG, "Scrolling to previous comic.");
         viewPager.arrowScroll(View.FOCUS_LEFT);
     }
 
-    @OnLongClick(R.id.previous)
+    @OnLongClick(R.id.newerComic)
     public boolean scrollToFirstComic() {
         Log.d(LOG_TAG, "Scrolling to first comic.");
         viewPager.setCurrentItem(0, true);

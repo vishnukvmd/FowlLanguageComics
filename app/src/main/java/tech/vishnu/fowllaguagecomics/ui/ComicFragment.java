@@ -19,6 +19,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnLongClick;
@@ -41,7 +43,8 @@ public class ComicFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_comic, container, false);
         ButterKnife.bind(this, rootView);
         int position = getArguments().getInt(POSITION, 0);
-        Comic comic = ComicLoaderService.getInstance().getSavedComics().get(position);
+        List<Comic> savedComics = ComicLoaderService.getInstance().getSavedComics();
+        Comic comic = savedComics.get(savedComics.size() - position - 1);
         setupComic(comic);
         return rootView;
     }
