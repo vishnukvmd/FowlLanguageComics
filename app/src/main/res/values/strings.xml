@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fowl Laguage Comics</string>
+    <string name="app_name">Fowl Language Comics</string>
 
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -15,6 +15,8 @@
     <string name="new_comic_notice">New comic available!</string>
     <string name="please_wait">Please wait…</string>
     <string name="something_went_wrong">Oops. Something went wrong.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="buy_comic">Buy comic</string>
+    <string name="share_comic">Share comic</string>
+    <string name="bonus_panel">Bonus panel</string>
 </resources>

@@ -9,41 +9,6 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/buy_comic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@string/buy_comic"
-            android:src="@drawable/ic_shopping_cart_black_48dp"/>
-
-        <ImageView
-            android:id="@+id/share_comic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="@string/share"
-            android:src="@drawable/ic_share_black_48dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"/>
-
-        <ImageView
-            android:id="@+id/star_comic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@string/Next"
-            android:src="@drawable/ic_favorite_border_black_48dp"/>
-    </RelativeLayout>
-
-
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,8 +24,8 @@
 
         <ImageView
             android:id="@+id/newer_comic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -69,8 +34,8 @@
 
         <ImageView
             android:id="@+id/random"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:contentDescription="@string/share"
             android:src="@drawable/ic_shuffle_black_48dp"
             android:layout_alignParentTop="true"
@@ -78,8 +43,8 @@
 
         <ImageView
             android:id="@+id/older_comic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"

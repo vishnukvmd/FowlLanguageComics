@@ -1,7 +1,12 @@
 package tech.vishnu.fowllaguagecomics.ui;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -17,9 +25,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnLongClick;
 import tech.vishnu.fowllaguagecomics.Comic;
 import tech.vishnu.fowllaguagecomics.R;
 import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
+import tech.vishnu.fowllaguagecomics.utils.Executors;
+import tech.vishnu.fowllaguagecomics.utils.FileUtils;
 
 public class ComicFragment extends Fragment {
     public static final String POSITION = "position";
@@ -28,6 +39,7 @@ public class ComicFragment extends Fragment {
     @Bind(R.id.comic_image) ImageView comicImageView;
     @Bind(R.id.progress_bar) ProgressBar progressBar;
     @Bind(R.id.comic_title) TextView titleTextView;
+    private Comic comic;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +48,7 @@ public class ComicFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         int position = getArguments().getInt(POSITION, 0);
         List<Comic> savedComics = ComicLoaderService.getInstance().getSavedComics();
-        Comic comic = savedComics.get(savedComics.size() - position - 1);
+        comic = savedComics.get(savedComics.size() - position - 1);
         setupComic(comic);
         return rootView;
     }
@@ -58,5 +70,78 @@ public class ComicFragment extends Fragment {
 
                     }
                 });
+    }
+
+
+    @OnLongClick(R.id.comic_image)
+    public boolean onComicLongClick() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle("#" + comic.id + " " + comic.title);
+        CharSequence[] items;
+        if (!comic.bonusPanelUrl.isEmpty()) {
+            items = new CharSequence[3];
+            items[0] = getActivity().getString(R.string.share_comic);
+            items[1] = getActivity().getString(R.string.buy_comic);
+            items[2] = getActivity().getString(R.string.bonus_panel);
+        } else {
+            items = new CharSequence[2];
+            items[0] = getActivity().getString(R.string.share_comic);
+            items[1] = getActivity().getString(R.string.buy_comic);
+        }
+        alertDialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        shareImage();
+                        break;
+                    case 1:
+                        buyComic();
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+        });
+        alertDialog.show();
+        return true;
+    }
+
+    private void buyComic() {
+        String url = "http://www.fowllanguagecomics.com/shop/?id=" + comic.flcId;
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
+    }
+
+    private void showBonusPanel() {
+        //TODO
+    }
+
+    private void shareImage() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+
+        ListenableFuture<Uri> future = FileUtils.saveImageToDisk(getActivity(), comicImageView);
+        Futures.addCallback(future, new FutureCallback<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                progressDialog.dismiss();
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("image/jpeg");
+                share.putExtra(Intent.EXTRA_STREAM, uri);
+                Log.d(LOG_TAG, "Saved file to:" + uri);
+                startActivity(Intent.createChooser(share, "Share Image"));
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                progressDialog.dismiss();
+                android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(getActivity());
+                alertDialog.setTitle(R.string.something_went_wrong);
+                alertDialog.setPositiveButton(R.string.ok, null);
+                alertDialog.show();
+            }
+        }, Executors.ui);
     }
 }

@@ -1,9 +1,5 @@
 package tech.vishnu.fowllaguagecomics.ui;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +25,6 @@ import tech.vishnu.fowllaguagecomics.Comic;
 import tech.vishnu.fowllaguagecomics.R;
 import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
 import tech.vishnu.fowllaguagecomics.utils.Executors;
-import tech.vishnu.fowllaguagecomics.utils.FileUtils;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -159,45 +154,5 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Scrolling to random comic.");
         int randomComicPosition = RANDOM_NUMBER_GENERATOR.nextInt(size);
         viewPager.setCurrentItem(randomComicPosition, false);
-    }
-
-
-    @OnClick(R.id.share_comic)
-    public void shareImage() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.please_wait));
-        progressDialog.show();
-
-        ImageView comicImageView = (ImageView) findViewById(R.id.comic_image);
-        ListenableFuture<Uri> future = FileUtils.saveImageToDisk(this, comicImageView);
-        Futures.addCallback(future, new FutureCallback<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                progressDialog.dismiss();
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("image/jpeg");
-                share.putExtra(Intent.EXTRA_STREAM, uri);
-                Log.d(LOG_TAG, "Saved file to:" + uri);
-                startActivity(Intent.createChooser(share, "Share Image"));
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                progressDialog.dismiss();
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-                alertDialog.setTitle(R.string.something_went_wrong);
-                alertDialog.setPositiveButton(R.string.ok, null);
-                alertDialog.show();
-            }
-        }, Executors.ui);
-    }
-
-    @OnClick(R.id.buy_comic)
-    public void buyComic() {
-        List<Comic> savedComics = ComicLoaderService.getInstance().getSavedComics();
-        Comic comic = savedComics.get(savedComics.size() - viewPager.getCurrentItem() - 1);
-        String url = "http://www.fowllanguagecomics.com/shop/?id=" + comic.flcId;
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
     }
 }
