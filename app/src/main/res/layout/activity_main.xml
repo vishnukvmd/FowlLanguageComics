@@ -30,14 +30,14 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:contentDescription="@string/previous"
-            android:src="@drawable/ic_navigate_before_black_48dp"/>
+            android:src="@drawable/left_arrow"/>
 
         <ImageView
             android:id="@+id/random"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="@string/share"
-            android:src="@drawable/ic_shuffle_black_48dp"
+            android:src="@drawable/random_icon"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
 
@@ -49,6 +49,6 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:contentDescription="@string/Next"
-            android:src="@drawable/ic_navigate_next_black_48dp"/>
+            android:src="@drawable/right_arrow"/>
     </RelativeLayout>
 </LinearLayout>
