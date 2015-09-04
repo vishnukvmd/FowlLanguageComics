@@ -17,6 +17,6 @@
     <string name="something_went_wrong">Oops. Something went wrong.</string>
     <string name="ok">OK</string>
     <string name="buy_comic">Buy comic</string>
-    <string name="share_comic">Share comic</string>
+    <string name="back">Back</string>
     <string name="bonus_panel">Bonus panel</string>
 </resources>

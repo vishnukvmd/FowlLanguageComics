@@ -1,6 +1,7 @@
 package tech.vishnu.fowllaguagecomics.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.pager) ViewPager viewPager;
     @Bind(R.id.older_comic) ImageView olderComicButton;
     @Bind(R.id.newer_comic) ImageView newerComicButton;
+    private ComicPagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupComics() {
         size = comicLoaderService.getSavedComics().size();
-        ComicPagerAdapter pagerAdapter = new ComicPagerAdapter(getSupportFragmentManager(), size);
+        pagerAdapter = new ComicPagerAdapter(getSupportFragmentManager(), size);
         viewPager.setAdapter(pagerAdapter);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -121,6 +123,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        int currentItem = viewPager.getCurrentItem();
+        ComicFragment fragment = pagerAdapter.getItem(currentItem);
+        if (!fragment.onBackPressed()) {
+            super.onBackPressed();
+        }
     }
 
     @OnClick(R.id.older_comic)

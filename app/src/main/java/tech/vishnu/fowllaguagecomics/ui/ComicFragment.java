@@ -37,8 +37,13 @@ public class ComicFragment extends Fragment {
     private static final String LOG_TAG = ComicFragment.class.getSimpleName();
 
     @Bind(R.id.comic_image) ImageView comicImageView;
-    @Bind(R.id.progress_bar) ProgressBar progressBar;
+    @Bind(R.id.bonus_panel) ImageView bonusPanelImageView;
+    @Bind(R.id.comic_progress_bar) ProgressBar comicImageProgressBar;
+    @Bind(R.id.bonus_panel_progress_bar) ProgressBar bonusPanelProgressBar;
     @Bind(R.id.comic_title) TextView titleTextView;
+    @Bind(R.id.comic_root) View comicRootView;
+    @Bind(R.id.comic_image_section) View comicImageSection;
+    @Bind(R.id.bonus_panel_section) View bonusPanelSection;
     private Comic comic;
 
     @Override
@@ -55,13 +60,13 @@ public class ComicFragment extends Fragment {
 
     private void setupComic(final Comic comic) {
         Log.d(LOG_TAG, "Setting up image: " + comic.imageUrl);
-        progressBar.setVisibility(View.VISIBLE);
+        comicImageProgressBar.setVisibility(View.VISIBLE);
         Picasso.with(getActivity())
                 .load(comic.imageUrl)
                 .into(comicImageView, new Callback() {
                     @Override
                     public void onSuccess() {
-                        progressBar.setVisibility(View.GONE);
+                        comicImageProgressBar.setVisibility(View.GONE);
                         titleTextView.setText(comic.title);
                     }
 
@@ -72,6 +77,14 @@ public class ComicFragment extends Fragment {
                 });
     }
 
+    public boolean onBackPressed() {
+        if (comicImageSection.getVisibility() == View.VISIBLE) {
+            return false;
+        } else {
+            flipCard();
+            return true;
+        }
+    }
 
     @OnLongClick(R.id.comic_image)
     public boolean onComicLongClick() {
@@ -80,12 +93,12 @@ public class ComicFragment extends Fragment {
         CharSequence[] items;
         if (!comic.bonusPanelUrl.isEmpty()) {
             items = new CharSequence[3];
-            items[0] = getActivity().getString(R.string.share_comic);
+            items[0] = getActivity().getString(R.string.share);
             items[1] = getActivity().getString(R.string.buy_comic);
             items[2] = getActivity().getString(R.string.bonus_panel);
         } else {
             items = new CharSequence[2];
-            items[0] = getActivity().getString(R.string.share_comic);
+            items[0] = getActivity().getString(R.string.share);
             items[1] = getActivity().getString(R.string.buy_comic);
         }
         alertDialog.setItems(items, new DialogInterface.OnClickListener() {
@@ -93,12 +106,37 @@ public class ComicFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        shareImage();
+                        shareImage(comicImageView);
                         break;
                     case 1:
                         buyComic();
                         break;
                     case 2:
+                        flipCard();
+                        break;
+                }
+            }
+        });
+        alertDialog.show();
+        return true;
+    }
+
+    @OnLongClick(R.id.bonus_panel)
+    public boolean onBonusPanelLongClick() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle("#" + comic.id + " " + comic.title + " - Bonus Panel");
+        CharSequence[] items = new CharSequence[2];
+        items[0] = getActivity().getString(R.string.share);
+        items[1] = getActivity().getString(R.string.back);
+        alertDialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        shareImage(bonusPanelImageView);
+                        break;
+                    case 1:
+                        flipCard();
                         break;
                 }
             }
@@ -113,16 +151,36 @@ public class ComicFragment extends Fragment {
         startActivity(browserIntent);
     }
 
-    private void showBonusPanel() {
-        //TODO
+    private void flipCard() {
+        FlipAnimation flipAnimation = new FlipAnimation(comicImageSection, bonusPanelSection);
+
+        if (comicImageSection.getVisibility() == View.GONE) {
+            flipAnimation.reverse();
+        } else {
+            bonusPanelProgressBar.setVisibility(View.VISIBLE);
+            Picasso.with(getActivity())
+                    .load(comic.bonusPanelUrl)
+                    .into(bonusPanelImageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            bonusPanelProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
+        }
+        comicRootView.startAnimation(flipAnimation);
     }
 
-    private void shareImage() {
+    private void shareImage(ImageView imageView) {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getString(R.string.please_wait));
         progressDialog.show();
 
-        ListenableFuture<Uri> future = FileUtils.saveImageToDisk(getActivity(), comicImageView);
+        ListenableFuture<Uri> future = FileUtils.saveImageToDisk(getActivity(), imageView);
         Futures.addCallback(future, new FutureCallback<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
