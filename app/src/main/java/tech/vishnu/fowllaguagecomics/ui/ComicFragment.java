@@ -61,7 +61,7 @@ public class ComicFragment extends Fragment {
     private void setupComic(final Comic comic) {
         Log.d(LOG_TAG, "Setting up image: " + comic.imageUrl);
         comicImageProgressBar.setVisibility(View.VISIBLE);
-        Picasso.with(getActivity())
+        ComicLoaderService.getInstance().getPicasso()
                 .load(comic.imageUrl)
                 .into(comicImageView, new Callback() {
                     @Override

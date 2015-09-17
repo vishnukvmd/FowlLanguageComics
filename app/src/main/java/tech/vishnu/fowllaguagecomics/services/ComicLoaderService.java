@@ -11,6 +11,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,12 +32,14 @@ public class ComicLoaderService {
     private static final String LOG_TAG = ComicLoaderService.class.getSimpleName();
     private static final String COMICS_KEY = "comics";
     private static final Gson GSON = new Gson();
+    private static final int MAX_DISK_CACHE_SIZE = 512 * 1024 * 1024; // 512MB
 
     private final SettableFuture<List<Comic>> future = SettableFuture.create();
     private final List<Comic> comics = new ArrayList<>();
     private final SharedPreferences store;
 
     private static ComicLoaderService _;
+    private final Picasso picasso;
 
     private ComicLoaderService(Context context) {
         this.store = context.getSharedPreferences(COMICS_KEY, Context.MODE_PRIVATE);
@@ -46,6 +50,9 @@ public class ComicLoaderService {
             ComicResponse savedData = GSON.fromJson(comicsString, ComicResponse.class);
             comics.addAll(savedData.comics);
         }
+
+        OkHttpDownloader downloader = new OkHttpDownloader(context, MAX_DISK_CACHE_SIZE);
+        picasso = new Picasso.Builder(context).downloader(downloader).build();
     }
 
     public static void createInstance(Context context) {
@@ -79,6 +86,10 @@ public class ComicLoaderService {
                 return comics;
             }
         });
+    }
+
+    public Picasso getPicasso() {
+        return picasso;
     }
 
     private void fetchComicsFromServer() {
