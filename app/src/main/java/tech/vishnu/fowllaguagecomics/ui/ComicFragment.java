@@ -95,20 +95,17 @@ public class ComicFragment extends Fragment {
         final boolean isFavoriteComic = ComicLoaderService.getInstance().isFavorite(comic);
         if (!comic.bonusPanelUrl.isEmpty()) {
             items = new CharSequence[4];
-            items[0] = getActivity().getString(R.string.share);
-            if (isFavoriteComic) {
-                items[1] = getActivity().getString(R.string.remove_from_favorites);
-            } else {
-                items[1] = getActivity().getString(R.string.add_to_favorites);
-            }
-            items[2] = getActivity().getString(R.string.buy_comic);
             items[3] = getActivity().getString(R.string.bonus_panel);
         } else {
             items = new CharSequence[3];
-            items[0] = getActivity().getString(R.string.share);
-            items[1] = getActivity().getString(R.string.add_to_favorites);
-            items[2] = getActivity().getString(R.string.buy_comic);
         }
+        items[0] = getActivity().getString(R.string.share);
+        if (isFavoriteComic) {
+            items[1] = getActivity().getString(R.string.remove_from_favorites);
+        } else {
+            items[1] = getActivity().getString(R.string.add_to_favorites);
+        }
+        items[2] = getActivity().getString(R.string.buy_comic);
         alertDialog.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
