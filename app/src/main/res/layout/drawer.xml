@@ -4,7 +4,7 @@
     android:layout_width="280dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="#ffffff"
+    android:background="@color/background"
     android:orientation="vertical"
     android:scrollbars="vertical">
 
@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/theme_color"
         android:orientation="vertical"
-        android:layout_marginBottom="4dp"
-        android:paddingBottom="15dp">
+        android:paddingBottom="12dp">
 
         <ImageView
             android:id="@+id/profile"
@@ -55,10 +54,10 @@
         android:id="@+id/favorites"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="#ffffff"
+        android:background="@drawable/background"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="14dp">
 
         <ImageView
             android:layout_width="24dp"
@@ -85,10 +84,10 @@
         android:id="@+id/shop"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="#ffffff"
+        android:background="@drawable/background"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="14dp">
 
         <ImageView
             android:layout_width="24dp"
@@ -115,10 +114,10 @@
         android:id="@+id/website"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="#ffffff"
+        android:background="@drawable/background"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="14dp">
 
         <ImageView
             android:layout_width="24dp"
@@ -145,10 +144,10 @@
         android:id="@+id/about"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="#ffffff"
+        android:background="@drawable/background"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="14dp">
 
         <ImageView
             android:layout_width="24dp"
@@ -171,11 +170,33 @@
             android:textAppearance="?android:attr/textAppearanceMedium"/>
     </LinearLayout>
 
-    <ImageView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/theme_color_light"/>
+
+    <RelativeLayout
         android:id="@+id/patreon"
-        android:layout_width="150dp"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
         android:layout_weight="1"
-        android:src="@drawable/patreon"/>
+        android:background="@drawable/background">
+
+        <ImageView
+            android:id="@+id/patreon_arrow"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow"/>
+
+        <ImageView
+            android:id="@+id/patreon_image"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/patreon"/>
+    </RelativeLayout>
 </LinearLayout>

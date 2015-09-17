@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#fff5c6</color>
+    <color name="theme_color">#a82d2d</color>
+    <color name="theme_color_dark">#941717</color>
+    <color name="background_dark">#e2ca6a</color>
+    <color name="theme_color_light">#f6b9b9</color>
+    <color name="background">#faf3d7</color>
+    <color name="pressed">#eeeeee</color>
+    <color name="white">#ffffff</color>
 </resources>
