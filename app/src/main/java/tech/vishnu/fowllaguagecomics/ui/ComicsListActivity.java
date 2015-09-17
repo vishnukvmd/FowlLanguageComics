@@ -6,6 +6,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.common.collect.Lists;
 
@@ -170,5 +172,12 @@ public class ComicsListActivity extends AppCompatActivity {
                 finish();
             }
         });
+        TextView emptyView = (TextView) findViewById(R.id.empty_view);
+        if (isFavoritesScreen) {
+            emptyView.setText(R.string.no_favorites);
+        } else {
+            emptyView.setText(R.string.no_results);
+        }
+        listView.setEmptyView(emptyView);
     }
 }

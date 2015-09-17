@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/background"
@@ -8,8 +9,16 @@
     <ListView
         android:id="@+id/listview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"/>
 
-    </ListView>
 
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textSize="22sp"
+        android:visibility="gone"
+        tools:text="@string/no_favorites"/>
 </LinearLayout>

@@ -36,4 +36,6 @@
     <string name="removed_from_favorites">Removed from favorites :(</string>
     <string name="remove_from_favorites">Remove from favorites</string>
     <string name="favorite_comics">Favorite Comics</string>
+    <string name="no_favorites">You haven\'t added any favorites yet.</string>
+    <string name="no_results">Uh-oh. No results to show.</string>
 </resources>
