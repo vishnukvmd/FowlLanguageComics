@@ -26,6 +26,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnLongClick;
 import tech.vishnu.fowllaguagecomics.Comic;
 import tech.vishnu.fowllaguagecomics.R;
@@ -87,8 +88,8 @@ public class ComicFragment extends Fragment {
         }
     }
 
-    @OnLongClick(R.id.comic_image)
-    public boolean onComicLongClick() {
+    @OnClick(R.id.comic_image)
+    public void onComicLongClick() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle("#" + comic.id + " " + comic.title);
         CharSequence[] items;
@@ -114,7 +115,7 @@ public class ComicFragment extends Fragment {
                         shareImage(comicImageView);
                         break;
                     case 1:
-                        if(isFavoriteComic) {
+                        if (isFavoriteComic) {
                             removeFromFavorites();
                         } else {
                             favoriteComic();
@@ -130,7 +131,11 @@ public class ComicFragment extends Fragment {
             }
         });
         alertDialog.show();
-        return true;
+    }
+
+    @OnClick(R.id.bonus_panel)
+    public void onBonusPanelClick() {
+        onBonusPanelLongClick();
     }
 
     @OnLongClick(R.id.bonus_panel)
@@ -157,13 +162,13 @@ public class ComicFragment extends Fragment {
         return true;
     }
 
-    private void buyComic() {
-        String url = "http://www.fowllanguagecomics.com/shop/?id=" + comic.flcId;
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
-    }
+    @OnLongClick(R.id.comic_image)
+    public boolean flipCard() {
+        if (comic.bonusPanelUrl.isEmpty()) {
+            Toast.makeText(getActivity(), R.string.no_toast, Toast.LENGTH_SHORT).show();
+            return true;
+        }
 
-    private void flipCard() {
         FlipAnimation flipAnimation = new FlipAnimation(comicImageSection, bonusPanelSection);
 
         if (comicImageSection.getVisibility() == View.GONE) {
@@ -185,6 +190,13 @@ public class ComicFragment extends Fragment {
                     });
         }
         comicRootView.startAnimation(flipAnimation);
+        return true;
+    }
+
+    private void buyComic() {
+        String url = "http://www.fowllanguagecomics.com/shop/?id=" + comic.flcId;
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 
     private void favoriteComic() {

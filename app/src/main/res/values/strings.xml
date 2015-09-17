@@ -49,4 +49,5 @@
     <string name="vishnu_site">www.vishnu.tech</string>
     <string name="github">Github</string>
     <string name="xda">XDA</string>
+    <string name="no_toast">No bonus panel for this comic :(</string>
 </resources>
