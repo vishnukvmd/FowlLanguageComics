@@ -21,6 +21,7 @@
     <string name="bonus_panel">Bonus panel</string>
     <string name="search">Search</string>
     <string name="search_hint">Search for comics</string>
+    <string name="search_hint_favorites">Search through your favorites</string>
     <string name="close_drawer">Close drawer</string>
     <string name="open_drawer">Open drawer</string>
     <string name="favorites">Favorites</string>
@@ -34,4 +35,5 @@
     <string name="added_to_favorites">Added to favorites successfully!</string>
     <string name="removed_from_favorites">Removed from favorites :(</string>
     <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="favorite_comics">Favorite Comics</string>
 </resources>

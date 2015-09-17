@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SearchActivity"
-            android:label="@string/search"
+            android:name=".ui.ComicsListActivity"
+            android:label="@string/favorite_comics"
             android:theme="@style/AppTheme.ActionBar">>
         </activity>
     </application>

@@ -29,19 +29,22 @@ import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
 import static tech.vishnu.fowllaguagecomics.ui.MainActivity.COMIC_ID;
 import static tech.vishnu.fowllaguagecomics.ui.MainActivity.RESULT_CODE;
 
-public class SearchActivity extends AppCompatActivity {
-    private static final String LOG_TAG = SearchActivity.class.getSimpleName();
+public class ComicsListActivity extends AppCompatActivity {
+    public static final String IS_FAVORITES_SCREEN = "favorites_screen";
+    private static final String LOG_TAG = ComicsListActivity.class.getSimpleName();
     @Bind(R.id.listview) ListView listView;
     private ArrayAdapter<String> listAdapter;
     private final List<String> list = new ArrayList<>();
-    private final List<Comic> comics = new ArrayList<>();
+    private final List<Comic> comicsToBeDisplayed = new ArrayList<>();
+    private boolean isFavoritesScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.comic_list);
         ButterKnife.bind(this);
 
+        isFavoritesScreen = getIntent().getBooleanExtra(IS_FAVORITES_SCREEN, false);
         setupListView();
     }
 
@@ -56,7 +59,11 @@ public class SearchActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.action_search);
         if (item != null) {
             SearchView searchView = (SearchView) item.getActionView();
-            searchView.setQueryHint(getString(R.string.search_hint));
+            if (isFavoritesScreen) {
+                searchView.setQueryHint(getString(R.string.search_hint_favorites));
+            } else {
+                searchView.setQueryHint(getString(R.string.search_hint));
+            }
         }
 
         return super.onCreateOptionsMenu(menu);
@@ -129,15 +136,20 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupList(String searchString) {
         list.clear();
-        comics.clear();
-        ArrayList<Comic> savedComics = Lists.newArrayList(ComicLoaderService.getInstance().getSavedComics());
-        Collections.reverse(savedComics);
-        for (Comic comic : savedComics) {
+        comicsToBeDisplayed.clear();
+        ArrayList<Comic> comics;
+        if (isFavoritesScreen) {
+            comics = Lists.newArrayList(ComicLoaderService.getInstance().getFavoriteComics());
+        } else {
+            comics = Lists.newArrayList(ComicLoaderService.getInstance().getSavedComics());
+        }
+        Collections.reverse(comics);
+        for (Comic comic : comics) {
             if (String.valueOf(comic.id).contains(searchString) ||
                     comic.title.toLowerCase().contains(searchString) ||
                     comic.keywords.toLowerCase().contains(searchString)) {
                 list.add("#" + comic.id + " " + comic.title);
-                comics.add(comic);
+                comicsToBeDisplayed.add(comic);
             }
         }
     }
@@ -150,7 +162,7 @@ public class SearchActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Comic comic = comics.get(position);
+                Comic comic = comicsToBeDisplayed.get(position);
                 Log.d(LOG_TAG, "Selected comic: " + comic);
                 Intent data = new Intent();
                 data.putExtra(COMIC_ID, comic.id);

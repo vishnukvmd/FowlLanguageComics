@@ -3,6 +3,7 @@ package tech.vishnu.fowllaguagecomics.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +33,8 @@ import tech.vishnu.fowllaguagecomics.Comic;
 import tech.vishnu.fowllaguagecomics.R;
 import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
 import tech.vishnu.fowllaguagecomics.utils.Executors;
+
+import static tech.vishnu.fowllaguagecomics.ui.ComicsListActivity.IS_FAVORITES_SCREEN;
 
 public class MainActivity extends AppCompatActivity {
     public static final String COMIC_ID = "comic_id";
@@ -135,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_search) {
-            Intent intent = new Intent(this, SearchActivity.class);
-            startActivityForResult(intent, 2);
+            Intent intent = new Intent(this, ComicsListActivity.class);
+            startActivityForResult(intent, RESULT_CODE);
             return true;
         }
 
@@ -195,7 +199,10 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.favorites)
     public void onFavoritesClick() {
-        Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ComicsListActivity.class);
+        intent.putExtra(IS_FAVORITES_SCREEN, true);
+        startActivityForResult(intent, RESULT_CODE);
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @OnClick(R.id.shop)

@@ -19,6 +19,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -91,6 +92,19 @@ public class ComicLoaderService {
                 return comics;
             }
         });
+    }
+
+    public List<Comic> getFavoriteComics() {
+        Type type = new TypeToken<HashSet<Integer>>() {
+        }.getType();
+        Set<Integer> currentFavoriteIds = GSON.fromJson(store.getString(FAVORITES_KEY, "[]"), type);
+        List<Comic> favoriteComics = new ArrayList<>();
+        for (Comic comic : comics) {
+            if (currentFavoriteIds.contains(comic.id)) {
+                favoriteComics.add(comic);
+            }
+        }
+        return favoriteComics;
     }
 
     public boolean isFavorite(Comic comic) {
