@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -91,15 +92,22 @@ public class ComicFragment extends Fragment {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle("#" + comic.id + " " + comic.title);
         CharSequence[] items;
+        final boolean isFavoriteComic = ComicLoaderService.getInstance().isFavorite(comic);
         if (!comic.bonusPanelUrl.isEmpty()) {
+            items = new CharSequence[4];
+            items[0] = getActivity().getString(R.string.share);
+            if (isFavoriteComic) {
+                items[1] = getActivity().getString(R.string.remove_from_favorites);
+            } else {
+                items[1] = getActivity().getString(R.string.add_to_favorites);
+            }
+            items[2] = getActivity().getString(R.string.buy_comic);
+            items[3] = getActivity().getString(R.string.bonus_panel);
+        } else {
             items = new CharSequence[3];
             items[0] = getActivity().getString(R.string.share);
-            items[1] = getActivity().getString(R.string.buy_comic);
-            items[2] = getActivity().getString(R.string.bonus_panel);
-        } else {
-            items = new CharSequence[2];
-            items[0] = getActivity().getString(R.string.share);
-            items[1] = getActivity().getString(R.string.buy_comic);
+            items[1] = getActivity().getString(R.string.add_to_favorites);
+            items[2] = getActivity().getString(R.string.buy_comic);
         }
         alertDialog.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -109,9 +117,16 @@ public class ComicFragment extends Fragment {
                         shareImage(comicImageView);
                         break;
                     case 1:
-                        buyComic();
+                        if(isFavoriteComic) {
+                            removeFromFavorites();
+                        } else {
+                            favoriteComic();
+                        }
                         break;
                     case 2:
+                        buyComic();
+                        break;
+                    case 3:
                         flipCard();
                         break;
                 }
@@ -173,6 +188,16 @@ public class ComicFragment extends Fragment {
                     });
         }
         comicRootView.startAnimation(flipAnimation);
+    }
+
+    private void favoriteComic() {
+        ComicLoaderService.getInstance().addToFavorites(comic);
+        Toast.makeText(getActivity(), R.string.added_to_favorites, Toast.LENGTH_SHORT).show();
+    }
+
+    private void removeFromFavorites() {
+        ComicLoaderService.getInstance().removeFromFavorites(comic);
+        Toast.makeText(getActivity(), R.string.removed_from_favorites, Toast.LENGTH_SHORT).show();
     }
 
     private void shareImage(ImageView imageView) {

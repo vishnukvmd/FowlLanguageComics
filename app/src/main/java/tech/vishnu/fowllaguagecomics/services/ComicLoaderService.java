@@ -10,13 +10,17 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -31,6 +35,7 @@ public class ComicLoaderService {
     private static final String URL = "https://fowllanguage.gscheffler.de";
     private static final String LOG_TAG = ComicLoaderService.class.getSimpleName();
     private static final String COMICS_KEY = "comics";
+    private static final String FAVORITES_KEY = "favorites";
     private static final Gson GSON = new Gson();
     private static final int MAX_DISK_CACHE_SIZE = 512 * 1024 * 1024; // 512MB
 
@@ -86,6 +91,29 @@ public class ComicLoaderService {
                 return comics;
             }
         });
+    }
+
+    public boolean isFavorite(Comic comic) {
+        Type type = new TypeToken<HashSet<Integer>>() {
+        }.getType();
+        Set<Integer> currentFavorites = GSON.fromJson(store.getString(FAVORITES_KEY, "[]"), type);
+        return currentFavorites.contains(comic.id);
+    }
+
+    public void addToFavorites(Comic comic) {
+        Type type = new TypeToken<HashSet<Integer>>() {
+        }.getType();
+        Set<Integer> currentFavorites = GSON.fromJson(store.getString(FAVORITES_KEY, "[]"), type);
+        currentFavorites.add(comic.id);
+        store.edit().putString(FAVORITES_KEY, GSON.toJson(currentFavorites)).apply();
+    }
+
+    public void removeFromFavorites(Comic comic) {
+        Type type = new TypeToken<HashSet<Integer>>() {
+        }.getType();
+        Set<Integer> currentFavorites = GSON.fromJson(store.getString(FAVORITES_KEY, "[]"), type);
+        currentFavorites.remove(comic.id);
+        store.edit().putString(FAVORITES_KEY, GSON.toJson(currentFavorites)).apply();
     }
 
     public Picasso getPicasso() {
