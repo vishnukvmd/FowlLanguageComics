@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit.Callback;
@@ -57,7 +58,7 @@ public class ComicLoaderService {
     }
 
     public synchronized List<Comic> getSavedComics() {
-        return comics;
+        return Collections.unmodifiableList(comics);
     }
 
     public synchronized boolean hasSavedComics() {

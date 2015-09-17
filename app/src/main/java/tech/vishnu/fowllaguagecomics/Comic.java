@@ -23,4 +23,12 @@ public class Comic {
         this.keywords = keywords;
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Comic{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

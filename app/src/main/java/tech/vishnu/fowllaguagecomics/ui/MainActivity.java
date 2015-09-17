@@ -1,5 +1,6 @@
 package tech.vishnu.fowllaguagecomics.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -27,15 +28,17 @@ import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
 import tech.vishnu.fowllaguagecomics.utils.Executors;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String COMIC_ID = "comic_id";
+    public static final int RESULT_CODE = 2;
+
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final Random RANDOM_NUMBER_GENERATOR = new Random();
-
-    private int size = 0;
-    private ComicLoaderService comicLoaderService;
 
     @Bind(R.id.pager) ViewPager viewPager;
     @Bind(R.id.older_comic) ImageView olderComicButton;
     @Bind(R.id.newer_comic) ImageView newerComicButton;
+    private int size = 0;
+    private ComicLoaderService comicLoaderService;
     private ComicPagerAdapter pagerAdapter;
 
     @Override
@@ -117,7 +120,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivityForResult(intent, 2);
             return true;
         }
 
@@ -164,5 +169,16 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Scrolling to random comic.");
         int randomComicPosition = RANDOM_NUMBER_GENERATOR.nextInt(size);
         viewPager.setCurrentItem(randomComicPosition, false);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(LOG_TAG, "Search result: " + requestCode);
+        if (resultCode == RESULT_CODE) {
+            int position = data.getIntExtra(COMIC_ID, 1);
+            Log.d(LOG_TAG, "Opening comic: " + (size - position));
+            viewPager.setCurrentItem(size - position, false);
+        }
     }
 }
