@@ -1,4 +1,4 @@
-package tech.vishnu.fowllaguagecomics.utils;
+package com.fowllanguagecomics.android.utils;
 
 import android.support.annotation.NonNull;
 

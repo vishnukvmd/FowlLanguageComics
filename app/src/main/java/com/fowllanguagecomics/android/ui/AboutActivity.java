@@ -1,4 +1,4 @@
-package tech.vishnu.fowllaguagecomics.ui;
+package com.fowllanguagecomics.android.ui;
 
 import android.content.Intent;
 import android.net.Uri;

@@ -1,4 +1,4 @@
-package tech.vishnu.fowllaguagecomics.ui;
+package com.fowllanguagecomics.android.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,12 +23,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import tech.vishnu.fowllaguagecomics.Comic;
+import com.fowllanguagecomics.android.Comic;
 import tech.vishnu.fowllaguagecomics.R;
-import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
+import com.fowllanguagecomics.android.services.ComicLoaderService;
 
-import static tech.vishnu.fowllaguagecomics.ui.MainActivity.COMIC_ID;
-import static tech.vishnu.fowllaguagecomics.ui.MainActivity.RESULT_CODE;
+import static com.fowllanguagecomics.android.ui.MainActivity.COMIC_ID;
+import static com.fowllanguagecomics.android.ui.MainActivity.RESULT_CODE;
 
 public class ComicsListActivity extends AppCompatActivity {
     public static final String IS_FAVORITES_SCREEN = "favorites_screen";

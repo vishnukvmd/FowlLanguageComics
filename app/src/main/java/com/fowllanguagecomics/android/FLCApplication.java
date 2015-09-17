@@ -1,9 +1,6 @@
-package tech.vishnu.fowllaguagecomics;
+package com.fowllanguagecomics.android;
 
 import android.app.Application;
-import android.content.Context;
-
-import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
 
 public class FLCApplication extends Application {
     @Override

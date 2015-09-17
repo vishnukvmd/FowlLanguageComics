@@ -1,4 +1,4 @@
-package tech.vishnu.fowllaguagecomics.ui;
+package com.fowllanguagecomics.android.ui;
 
 import android.graphics.Camera;
 import android.graphics.Matrix;

@@ -1,4 +1,4 @@
-package tech.vishnu.fowllaguagecomics;
+package com.fowllanguagecomics.android;
 
 import com.google.gson.annotations.SerializedName;
 

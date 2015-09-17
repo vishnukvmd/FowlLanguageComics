@@ -1,4 +1,4 @@
-package tech.vishnu.fowllaguagecomics.ui;
+package com.fowllanguagecomics.android.ui;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -28,11 +28,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
-import tech.vishnu.fowllaguagecomics.Comic;
+import com.fowllanguagecomics.android.Comic;
 import tech.vishnu.fowllaguagecomics.R;
-import tech.vishnu.fowllaguagecomics.services.ComicLoaderService;
-import tech.vishnu.fowllaguagecomics.utils.Executors;
-import tech.vishnu.fowllaguagecomics.utils.FileUtils;
+import com.fowllanguagecomics.android.services.ComicLoaderService;
+import com.fowllanguagecomics.android.utils.Executors;
+import com.fowllanguagecomics.android.utils.FileUtils;
 
 public class ComicFragment extends Fragment {
     public static final String POSITION = "position";

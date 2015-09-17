@@ -1,4 +1,4 @@
-package tech.vishnu.fowllaguagecomics.services;
+package com.fowllanguagecomics.android.services;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,7 +19,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -29,8 +28,8 @@ import retrofit.RetrofitError;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
-import tech.vishnu.fowllaguagecomics.Comic;
-import tech.vishnu.fowllaguagecomics.utils.Executors;
+import com.fowllanguagecomics.android.Comic;
+import com.fowllanguagecomics.android.utils.Executors;
 
 public class ComicLoaderService {
     private static final String URL = "https://fowllanguage.gscheffler.de";
