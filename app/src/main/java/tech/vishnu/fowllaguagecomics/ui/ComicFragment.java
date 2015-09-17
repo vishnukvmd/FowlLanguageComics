@@ -134,12 +134,7 @@ public class ComicFragment extends Fragment {
     }
 
     @OnClick(R.id.bonus_panel)
-    public void onBonusPanelClick() {
-        onBonusPanelLongClick();
-    }
-
-    @OnLongClick(R.id.bonus_panel)
-    public boolean onBonusPanelLongClick() {
+    public void onBonusPanelLongClick() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle("#" + comic.id + " " + comic.title + " - Bonus Panel");
         CharSequence[] items = new CharSequence[2];
@@ -159,10 +154,9 @@ public class ComicFragment extends Fragment {
             }
         });
         alertDialog.show();
-        return true;
     }
 
-    @OnLongClick(R.id.comic_image)
+    @OnLongClick({R.id.comic_image, R.id.bonus_panel})
     public boolean flipCard() {
         if (comic.bonusPanelUrl.isEmpty()) {
             Toast.makeText(getActivity(), R.string.no_toast, Toast.LENGTH_SHORT).show();
