@@ -1,9 +1,14 @@
 package tech.vishnu.fowllaguagecomics.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.pager) ViewPager viewPager;
     @Bind(R.id.older_comic) ImageView olderComicButton;
     @Bind(R.id.newer_comic) ImageView newerComicButton;
+    @Bind(R.id.tool_bar) Toolbar toolbar;
+    @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
     private int size = 0;
     private ComicLoaderService comicLoaderService;
     private ComicPagerAdapter pagerAdapter;
@@ -47,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         ComicLoaderService.createInstance(this);
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.open_drawer, R.string.close_drawer);
+        drawerLayout.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
         comicLoaderService = ComicLoaderService.getInstance();
         fetchComicsFromServer();
         if (comicLoaderService.hasSavedComics()) {
@@ -169,6 +183,47 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Scrolling to random comic.");
         int randomComicPosition = RANDOM_NUMBER_GENERATOR.nextInt(size);
         viewPager.setCurrentItem(randomComicPosition, false);
+    }
+
+    @OnClick(R.id.email)
+    public void onEmailClick() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.email_address));
+        startActivity(Intent.createChooser(intent, getString(R.string.choose_email_application)));
+    }
+
+    @OnClick(R.id.favorites)
+    public void onFavoritesClick() {
+        Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.shop)
+    public void onShopClick() {
+        openBrowser("http://www.fowllanguagecomics.com/shop/");
+    }
+
+    @OnClick(R.id.website)
+    public void onWebsiteClick() {
+        openBrowser("http://www.fowllanguagecomics.com/");
+    }
+
+    @OnClick(R.id.about)
+    public void onAboutClick() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.about)
+                .setMessage("App by Vishnu Mohandas")
+                .setPositiveButton(R.string.ok, null);
+        alertDialog.show();
+    }
+
+    @OnClick(R.id.patreon)
+    public void onPatreonClick() {
+        openBrowser("https://www.patreon.com/fowllanguage");
+    }
+
+    private void openBrowser(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 
     @Override

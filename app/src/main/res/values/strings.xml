@@ -21,4 +21,13 @@
     <string name="bonus_panel">Bonus panel</string>
     <string name="search">Search</string>
     <string name="search_hint">Search for comics</string>
+    <string name="close_drawer">Close drawer</string>
+    <string name="open_drawer">Open drawer</string>
+    <string name="favorites">Favorites</string>
+    <string name="shop">Shop</string>
+    <string name="website">Website</string>
+    <string name="about">About</string>
+    <string name="brian_gordon">Brian Gordon</string>
+    <string name="email_address">seriousarteest@gmail.com</string>
+    <string name="choose_email_application">Send email via:</string>
 </resources>
