@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="tech.vishnu.fowllaguagecomics"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="tech.vishnu.fowllaguagecomics"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -24,6 +25,11 @@
         <activity
             android:name=".ui.ComicsListActivity"
             android:label="@string/favorite_comics"
+            android:theme="@style/AppTheme.ActionBar">>
+        </activity>
+        <activity
+            android:name=".ui.AboutActivity"
+            android:label="@string/about"
             android:theme="@style/AppTheme.ActionBar">>
         </activity>
     </application>

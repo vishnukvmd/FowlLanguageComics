@@ -217,11 +217,8 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.about)
     public void onAboutClick() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.about)
-                .setMessage("App by Vishnu Mohandas")
-                .setPositiveButton(R.string.ok, null);
-        alertDialog.show();
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.patreon)

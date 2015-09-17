@@ -38,4 +38,15 @@
     <string name="favorite_comics">Favorite Comics</string>
     <string name="no_favorites">You haven\'t added any favorites yet.</string>
     <string name="no_results">Uh-oh. No results to show.</string>
+    <string name="comics">Comics</string>
+    <string name="brian">Brian Gordon</string>
+    <string name="fwl_site">www.FowlLanguageComics.com</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="separator">|</string>
+    <string name="android_application">Android Application</string>
+    <string name="vishnu">Vishnu Mohandas</string>
+    <string name="vishnu_site">www.vishnu.tech</string>
+    <string name="github">Github</string>
+    <string name="xda">XDA</string>
 </resources>
