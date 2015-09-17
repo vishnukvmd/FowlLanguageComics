@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.email)
     public void onEmailClick() {
         Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/html");
         intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.email_address));
         startActivity(Intent.createChooser(intent, getString(R.string.choose_email_application)));
     }
