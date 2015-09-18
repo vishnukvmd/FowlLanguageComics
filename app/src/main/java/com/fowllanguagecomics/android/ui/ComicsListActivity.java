@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fowllanguagecomics.android.Comic;
+import com.fowllanguagecomics.android.services.ComicLoaderService;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -23,9 +25,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.fowllanguagecomics.android.Comic;
 import tech.vishnu.fowllaguagecomics.R;
-import com.fowllanguagecomics.android.services.ComicLoaderService;
 
 import static com.fowllanguagecomics.android.ui.MainActivity.COMIC_ID;
 import static com.fowllanguagecomics.android.ui.MainActivity.RESULT_CODE;

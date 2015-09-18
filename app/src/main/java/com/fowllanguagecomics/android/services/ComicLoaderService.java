@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.fowllanguagecomics.android.Comic;
+import com.fowllanguagecomics.android.utils.Executors;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -28,8 +30,6 @@ import retrofit.RetrofitError;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
-import com.fowllanguagecomics.android.Comic;
-import com.fowllanguagecomics.android.utils.Executors;
 
 public class ComicLoaderService {
     private static final String URL = "https://fowllanguage.gscheffler.de";

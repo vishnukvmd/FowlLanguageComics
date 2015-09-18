@@ -16,6 +16,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.fowllanguagecomics.android.Comic;
+import com.fowllanguagecomics.android.services.ComicLoaderService;
+import com.fowllanguagecomics.android.utils.Executors;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -27,10 +30,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
-import com.fowllanguagecomics.android.Comic;
 import tech.vishnu.fowllaguagecomics.R;
-import com.fowllanguagecomics.android.services.ComicLoaderService;
-import com.fowllanguagecomics.android.utils.Executors;
 
 import static com.fowllanguagecomics.android.ui.ComicsListActivity.IS_FAVORITES_SCREEN;
 
