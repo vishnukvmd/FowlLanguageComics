@@ -54,6 +54,9 @@
                 <action android:name="com.parse.push.intent.DELETE" />
             </intent-filter>
         </receiver>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="c99ad29cabdc36270c2cb99dc07f07f4ebae41e0" />
     </application>
 
 </manifest>
