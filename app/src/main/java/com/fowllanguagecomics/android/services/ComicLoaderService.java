@@ -61,8 +61,10 @@ public class ComicLoaderService {
     }
 
     public static void createInstance(Context context) {
-        Log.d(LOG_TAG, "Creating instance");
-        _ = new ComicLoaderService(context);
+        if (_ == null) {
+            Log.d(LOG_TAG, "Creating instance");
+            _ = new ComicLoaderService(context);
+        }
     }
 
     public static ComicLoaderService getInstance() {
