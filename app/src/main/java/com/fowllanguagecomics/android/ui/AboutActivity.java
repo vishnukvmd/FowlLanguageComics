@@ -52,6 +52,12 @@ public class AboutActivity extends AppCompatActivity {
         openBrowser("https://www.twitter.com/fowlcomics");
     }
 
+    @OnClick(R.id.fwl_email)
+    public void onFWLEmailClick() {
+        String email = getString(R.string.email_address);
+        email(email);
+    }
+
     @OnClick(R.id.vishnu_site)
     public void onVishnuSiteClick() {
         openBrowser("http://www.vishnu.tech");
@@ -62,13 +68,21 @@ public class AboutActivity extends AppCompatActivity {
         openBrowser("https://www.github.com/v1shnu");
     }
 
-    @OnClick(R.id.vishnu_xda)
-    public void onXDAClick() {
-        openBrowser("http://forum.xda-developers.com/member.php?u=4128904");
+    @OnClick(R.id.vishnu_email)
+    public void onVishnuEmailClick() {
+        String email = getString(R.string.vishnu_email_address);
+        email(email);
     }
 
     private void openBrowser(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
+    }
+
+    private void email(String email) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/html");
+        intent.putExtra(Intent.EXTRA_EMAIL, email);
+        startActivity(Intent.createChooser(intent, getString(R.string.choose_email_application)));
     }
 }
