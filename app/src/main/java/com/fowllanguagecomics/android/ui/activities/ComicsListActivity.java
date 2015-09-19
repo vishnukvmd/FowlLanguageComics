@@ -1,4 +1,4 @@
-package com.fowllanguagecomics.android.ui;
+package com.fowllanguagecomics.android.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.fowllanguagecomics.android.Comic;
+import com.fowllanguagecomics.android.models.Comic;
 import com.fowllanguagecomics.android.services.ComicLoaderService;
 import com.google.common.collect.Lists;
 
@@ -26,9 +26,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tech.vishnu.fowllaguagecomics.R;
-
-import static com.fowllanguagecomics.android.ui.MainActivity.COMIC_ID;
-import static com.fowllanguagecomics.android.ui.MainActivity.RESULT_CODE;
 
 public class ComicsListActivity extends AppCompatActivity {
     public static final String IS_FAVORITES_SCREEN = "favorites_screen";
@@ -166,8 +163,8 @@ public class ComicsListActivity extends AppCompatActivity {
                 Comic comic = comicsToBeDisplayed.get(position);
                 Log.d(LOG_TAG, "Selected comic: " + comic);
                 Intent data = new Intent();
-                data.putExtra(COMIC_ID, comic.id);
-                setResult(RESULT_CODE, data);
+                data.putExtra(MainActivity.COMIC_ID, comic.id);
+                setResult(MainActivity.RESULT_CODE, data);
                 finish();
             }
         });

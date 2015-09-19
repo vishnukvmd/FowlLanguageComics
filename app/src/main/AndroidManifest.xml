@@ -21,7 +21,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name="com.fowllanguagecomics.android.ui.MainActivity"
+            android:name="com.fowllanguagecomics.android.ui.activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -30,12 +30,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.fowllanguagecomics.android.ui.ComicsListActivity"
+            android:name="com.fowllanguagecomics.android.ui.activities.ComicsListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.ActionBar">>
         </activity>
         <activity
-            android:name="com.fowllanguagecomics.android.ui.AboutActivity"
+            android:name="com.fowllanguagecomics.android.ui.activities.AboutActivity"
             android:label="@string/about"
             android:theme="@style/AppTheme.ActionBar">>
         </activity>

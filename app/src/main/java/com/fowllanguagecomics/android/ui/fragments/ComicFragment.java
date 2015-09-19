@@ -1,4 +1,4 @@
-package com.fowllanguagecomics.android.ui;
+package com.fowllanguagecomics.android.ui.fragments;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -16,8 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fowllanguagecomics.android.Comic;
+import com.fowllanguagecomics.android.models.Comic;
 import com.fowllanguagecomics.android.services.ComicLoaderService;
+import com.fowllanguagecomics.android.ui.utils.FlipAnimation;
 import com.fowllanguagecomics.android.utils.Executors;
 import com.fowllanguagecomics.android.utils.FileUtils;
 import com.google.common.util.concurrent.FutureCallback;

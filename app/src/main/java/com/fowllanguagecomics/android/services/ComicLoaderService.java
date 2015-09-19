@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.fowllanguagecomics.android.Comic;
+import com.fowllanguagecomics.android.models.Comic;
 import com.fowllanguagecomics.android.utils.Executors;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;

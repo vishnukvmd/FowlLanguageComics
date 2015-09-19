@@ -1,4 +1,4 @@
-package com.fowllanguagecomics.android.ui;
+package com.fowllanguagecomics.android.ui.activities;
 
 import android.content.Intent;
 import android.net.Uri;

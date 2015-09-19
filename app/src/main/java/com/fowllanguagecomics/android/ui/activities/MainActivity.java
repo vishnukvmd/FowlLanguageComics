@@ -1,4 +1,4 @@
-package com.fowllanguagecomics.android.ui;
+package com.fowllanguagecomics.android.ui.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,8 +16,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.fowllanguagecomics.android.Comic;
+import com.fowllanguagecomics.android.models.Comic;
 import com.fowllanguagecomics.android.services.ComicLoaderService;
+import com.fowllanguagecomics.android.ui.fragments.ComicFragment;
+import com.fowllanguagecomics.android.ui.adapters.ComicPagerAdapter;
 import com.fowllanguagecomics.android.utils.Executors;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -32,7 +34,7 @@ import butterknife.OnClick;
 import butterknife.OnLongClick;
 import tech.vishnu.fowllaguagecomics.R;
 
-import static com.fowllanguagecomics.android.ui.ComicsListActivity.IS_FAVORITES_SCREEN;
+import static com.fowllanguagecomics.android.ui.activities.ComicsListActivity.IS_FAVORITES_SCREEN;
 
 public class MainActivity extends AppCompatActivity {
     public static final String COMIC_ID = "comic_id";

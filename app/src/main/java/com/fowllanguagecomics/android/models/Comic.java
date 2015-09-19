@@ -1,4 +1,4 @@
-package com.fowllanguagecomics.android;
+package com.fowllanguagecomics.android.models;
 
 import com.google.gson.annotations.SerializedName;
 

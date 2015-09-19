@@ -1,8 +1,10 @@
-package com.fowllanguagecomics.android.ui;
+package com.fowllanguagecomics.android.ui.adapters;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.fowllanguagecomics.android.ui.fragments.ComicFragment;
 
 import java.util.HashMap;
 import java.util.Map;
