@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fowllaguagecomics.android.R;
 import com.fowllanguagecomics.android.models.Comic;
 import com.fowllanguagecomics.android.services.ComicLoaderService;
 import com.google.common.collect.Lists;
@@ -25,7 +26,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import tech.vishnu.fowllaguagecomics.R;
 
 public class ComicsListActivity extends AppCompatActivity {
     public static final String IS_FAVORITES_SCREEN = "favorites_screen";

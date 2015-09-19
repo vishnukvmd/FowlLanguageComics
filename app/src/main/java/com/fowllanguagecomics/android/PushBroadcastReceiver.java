@@ -4,10 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.fowllaguagecomics.android.R;
 import com.fowllanguagecomics.android.services.ComicLoaderService;
 import com.parse.ParsePushBroadcastReceiver;
-
-import tech.vishnu.fowllaguagecomics.R;
 
 public class PushBroadcastReceiver extends ParsePushBroadcastReceiver {
     private static final String LOG_TAG = PushBroadcastReceiver.class.getSimpleName();

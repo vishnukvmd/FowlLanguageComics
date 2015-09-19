@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.fowllaguagecomics.android.R;
 import com.fowllanguagecomics.android.models.Comic;
 import com.fowllanguagecomics.android.services.ComicLoaderService;
 import com.fowllanguagecomics.android.ui.fragments.ComicFragment;
@@ -32,7 +33,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
-import tech.vishnu.fowllaguagecomics.R;
 
 import static com.fowllanguagecomics.android.ui.activities.ComicsListActivity.IS_FAVORITES_SCREEN;
 

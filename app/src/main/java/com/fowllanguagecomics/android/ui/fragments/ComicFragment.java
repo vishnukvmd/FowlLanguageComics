@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fowllaguagecomics.android.R;
 import com.fowllanguagecomics.android.models.Comic;
 import com.fowllanguagecomics.android.services.ComicLoaderService;
 import com.fowllanguagecomics.android.ui.utils.FlipAnimation;
@@ -33,7 +34,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
-import tech.vishnu.fowllaguagecomics.R;
 
 public class ComicFragment extends Fragment {
     public static final String POSITION = "position";

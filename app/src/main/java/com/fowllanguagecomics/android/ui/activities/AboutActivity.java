@@ -7,9 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.fowllaguagecomics.android.R;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import tech.vishnu.fowllaguagecomics.R;
 
 public class AboutActivity extends AppCompatActivity {
     private static final String LOG_TAG = AboutActivity.class.getSimpleName();
